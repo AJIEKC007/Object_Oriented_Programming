@@ -1,4 +1,5 @@
 ﻿#include<iostream>
+#include <math.h>
 using namespace std;
 
 #define tab "\t"
@@ -34,18 +35,18 @@ public:
 	{
 		this->x = x;
 		this->y = y;
-		cout << "Constructor:\t" << this << endl;
+		//cout << "Constructor:\t" << this << endl;
 	}
 	Point(const Point& other)//Принимает другой существующий объект по константной ссылке
 	{
 		//other - это просто имя принимаемого параметра (имя другого объекта)
 		this->x = other.x;
 		this->y = other.y;
-		cout << "CopyConstructor:\t" << this << endl;
+		//cout << "CopyConstructor:\t" << this << endl;
 	}
 	~Point()
 	{
-		cout << "Destructor:\t" << this << endl;
+		//cout << "Destructor:\t" << this << endl;
 	}
 
 	//				Methods:
@@ -53,11 +54,18 @@ public:
 	{
 		cout << "X = " << x << tab << "Y = " << y << endl;
 	}
+
+	double distance(Point B)
+	{
+		return sqrt((B.x - x) * (B.x - x) + (B.y - y) * (B.y - y));
+	}
+
 };
 //После того, как мы создали структуру можно создавать ее объекты.
 //Создавая структуру или класс мы создаем новый тип данных.
 
 //#define STRUCT
+//#define CLASSROOM
 
 void main()
 {
@@ -80,6 +88,7 @@ void main()
 	Point* pA = &A;
 	cout << pA->x << tab << pA->y << endl;
 #endif // STRUCT
+#ifdef CLASSROOM
 
 	Point A(2.3, 4.5);	//Constructor
 	/*A.set_x(2);
@@ -90,5 +99,10 @@ void main()
 	Point B;		//DefaultConstructor
 	B.print();
 
-	Point C = A;	//CopyConstructor
+	Point C = A;	//CopyConstructor  
+#endif // CLASSROOM
+
+	Point A(2.5, 4.5);
+	Point B(3.5, 5.7);
+	cout << "\nРасстояние между точками: " << A.distance(B)<<endl<<endl;
 }
