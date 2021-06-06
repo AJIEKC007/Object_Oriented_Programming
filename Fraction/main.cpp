@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 class Fraction
@@ -6,7 +6,7 @@ class Fraction
 	int numerator ;
 	int denumerator;
 public:
-	//GET,SET методы
+	//GET,SET РјРµС‚РѕРґС‹
 	int get_numerator()const
 	{
 		return numerator;
@@ -23,18 +23,18 @@ public:
 	{
 		this->denumerator = denumerator;
 	}
-	//Конструктор с параметрами
+	//РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё
 	Fraction(int numerator = 1, int denumerator = 1)
 	{
 		this->numerator = numerator;
 		this->denumerator = denumerator;
 	}
-	//Методы
+	//РњРµС‚РѕРґС‹
 	void Print()
 	{
 		cout << numerator << "/" << denumerator << endl;
 	}
-	//Операторы изменяющие операнды
+	//РћРїРµСЂР°С‚РѕСЂС‹ РёР·РјРµРЅСЏСЋС‰РёРµ РѕРїРµСЂР°РЅРґС‹
 	Fraction &operator++() 
 	{
 		this->numerator++;
@@ -69,7 +69,7 @@ public:
 	{
 	}
 	};
-//Операторы не изменяющие операнды
+//РћРїРµСЂР°С‚РѕСЂС‹ РЅРµ РёР·РјРµРЅСЏСЋС‰РёРµ РѕРїРµСЂР°РЅРґС‹
 Fraction operator+(const Fraction &a, const Fraction &b)
 {
 	Fraction result;
