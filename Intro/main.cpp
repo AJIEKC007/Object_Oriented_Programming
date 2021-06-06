@@ -58,14 +58,14 @@ public:
 		cout << "CopyAssignment: \t" << this << endl;
 		return *this;
 	}
-	//Point operator+(const Point& other)const
-	//{
-	//	Point result;
-	//	result.x = this->x + other.x;
-	//	result.y = this->y + other.y;
-	//	cout << "Operator+: \t" << this << endl;
-	//	return result;
-	//}
+	/*Point operator+(const Point& other)const
+	{
+		Point result;
+		result.x = this->x + other.x;
+		result.y = this->y + other.y;
+		cout << "operator+: \t" << this << endl;
+		return result;
+	}*/
 
 	Point& operator++() //prefix increment
 	{
