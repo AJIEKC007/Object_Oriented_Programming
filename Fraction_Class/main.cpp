@@ -8,6 +8,7 @@ using std::endl;
 class Fraction;
 Fraction operator*(Fraction left, Fraction right);
 Fraction operator/(Fraction left, Fraction right);
+Fraction operator+(Fraction left, Fraction right);
 class Fraction
 {
 	int integer;
@@ -213,6 +214,11 @@ Fraction operator/(Fraction left, Fraction right)
 	return left * right.inverted();
 
 }
+Fraction operator+(Fraction left, Fraction right)
+{
+	
+	return left + right;
+}
 bool operator==(Fraction left, Fraction right)
 {
 	/*left.to_improper();
@@ -338,5 +344,5 @@ void main()
 	cout <<"b= "<< b<<endl;
 	Fraction C = 2.5;
 	cout << C << endl;
-	
+	cout << "СЛОЖЕНИЕ: " << A + C<< endl;
 }
