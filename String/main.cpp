@@ -23,30 +23,28 @@ public:
 		return str;
 	}
 	//          Constructors;
-	explicit String(unsigned int size = 80)
+	explicit String(unsigned int size = 80) :size(size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "SizeConstructor:" << this << endl;
 	}
-	String(const char str[])
+	String(const char str[]) :size(strlen(str) + 1), str(new char[size] {})
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 
 	}
-	String(const String& other)
+	String(const String& other) :size(other.size), str(new char[size] {})
 	{
-		this->size = other.size;
-		//this->str = other.str; //Нельзя так делать  с указателями!! //Shallow copy
-		this->str = new char[size] {};
+		
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];//Побитовое(поэлементное) копирование
 		                                                           // Deep copy.
 		cout << "CopyConstructor:" << this << endl;
 	}
-	String(String&& other)
+	String(String&& other):size(other.size),str(other.str)
 	{
 		//MoveConstructor должен работать так, как недолжен работать CopyConstructor
 		//Копиконструктор должен выполнять DeepCopy
@@ -55,8 +53,8 @@ public:
 		//MoveConstructor НЕ ДОЛЖЕН ВЫДЕЛЯТЬ ДИНАМИЧЕСКУЮ ПАМЯТЬ!!
 		//он берет память временного безымянного объекта, и передает ее создаваемому объекту
 		//при этом временный объект жлджен потерять доступ к своему значению
-		this->size = other.size;
-		this->str = other.str;
+		/*this->size = other.size;
+		this->str = other.str;*/
 		other.str = nullptr;
 		cout << "MoveConstructor:" << this << endl;
 	}
@@ -66,7 +64,7 @@ public:
 		cout << "Destructor:\t" << this << endl;
 	}
 	//         Operators
-	String& operator=(const String& other)
+	String& operator=(const String& other)//:size(other.size) Список инициализации моэно использовать только в конструкторе
 	{
 		if (this == &other)return *this;
 		delete[] this->str;
@@ -126,7 +124,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 
 //#define CONSTRUCTORS_CHECK
 //#define INPUT_CHECK
-//#define OPERATOR_PLUSE_CHECK
+#define OPERATOR_PLUSE_CHECK
 //#define HOW_CAN_WE_CALL_CONSTRUCTORS
 void main()
 {
@@ -162,8 +160,10 @@ void main()
 	//методы переноса неявно вызываются в том случае когда объект нужно проинициализировать или присвоить ему значение временного безимянного объекта
 	cout << delimiter << endl;
 	cout << str3 << endl;
-	str1 += str2;
+	//str1 += str2;
 	cout << str1 << endl;
+	String str3 = str1;
+	cout << str3 << endl;
 #endif // OPERATOR_PLUSE_CHECK
 #ifdef HOW_CAN_WE_CALL_CONSTRUCTORS
 
