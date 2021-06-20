@@ -23,27 +23,26 @@ public:
 		return str;
 	}
 	//          Constructors;
-	explicit String(unsigned int size = 80)
+	explicit String(unsigned int size = 80) :size(size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		/*this->size = size;
+		this->str = new char[size] {};*/
 		cout << "SizeConstructor:" << this << endl;
 	}
-	String(const char str[])
+	String(const char str[]):String(strlen(str)+1)
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+	
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 
 	}
-	String(const String& other)
+	String(const String& other):String(other.str)
 	{
-		this->size = other.size;
-		//this->str = other.str; //Нельзя так делать  с указателями!! //Shallow copy
-		this->str = new char[size] {};
-		for (int i = 0; i < size; i++)this->str[i] = other.str[i];//Побитовое(поэлементное) копирование
-		                                                           // Deep copy.
+		//this->size = other.size;
+		////this->str = other.str; //Нельзя так делать  с указателями!! //Shallow copy
+		//this->str = new char[size] {};
+		//for (int i = 0; i < size; i++)this->str[i] = other.str[i];//Побитовое(поэлементное) копирование
+		//                                                           // Deep copy.
 		cout << "CopyConstructor:" << this << endl;
 	}
 	String(String&& other)
@@ -126,7 +125,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 
 //#define CONSTRUCTORS_CHECK
 //#define INPUT_CHECK
-//#define OPERATOR_PLUSE_CHECK
+#define OPERATOR_PLUSE_CHECK
 //#define HOW_CAN_WE_CALL_CONSTRUCTORS
 void main()
 {
@@ -154,16 +153,20 @@ void main()
 #ifdef OPERATOR_PLUSE_CHECK
 	String str1 = "Hello";
 	String str2 = "World";
+	//cout << delimiter << endl;
+	//String str3;         //Default constructor
+	//str3 = str1 + str2;   //moveAssignment
+	////MoveMethods - метод переноса
+	////относят MoveConstructor (конструктор), MoveAssignment оператор переноса
+	////методы переноса неявно вызываются в том случае когда объект нужно проинициализировать или присвоить ему значение временного безимянного объекта
+	//cout << delimiter << endl;
+	//cout << str3 << endl;
+	////str1 += str2;
+	cout << str1 << endl;
 	cout << delimiter << endl;
-	String str3;         //Default constructor
-	str3 = str1 + str2;   //moveAssignment
-	//MoveMethods - метод переноса
-	//относят MoveConstructor (конструктор), MoveAssignment оператор переноса
-	//методы переноса неявно вызываются в том случае когда объект нужно проинициализировать или присвоить ему значение временного безимянного объекта
+	String str3 = str1;
 	cout << delimiter << endl;
 	cout << str3 << endl;
-	str1 += str2;
-	cout << str1 << endl;
 #endif // OPERATOR_PLUSE_CHECK
 #ifdef HOW_CAN_WE_CALL_CONSTRUCTORS
 
