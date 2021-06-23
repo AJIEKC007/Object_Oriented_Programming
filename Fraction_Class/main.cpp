@@ -214,10 +214,23 @@ Fraction operator/(Fraction left, Fraction right)
 	return left * right.inverted();
 
 }
-Fraction operator+(Fraction left, Fraction right)
+Fraction operator+(Fraction left,Fraction right)
 {
-	
-	return left + right;
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+		(left.get_numerator() + right.get_numerator(),
+			left.get_denominator() + right.get_denominator()
+		).to_proper();
+}
+Fraction operator-(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(left.get_numerator() - right.get_numerator(),
+		left.get_denominator() - right.get_denominator()
+	).to_proper();
 }
 bool operator==(Fraction left, Fraction right)
 {
@@ -344,5 +357,5 @@ void main()
 	cout <<"b= "<< b<<endl;
 	Fraction C = 2.5;
 	cout << C << endl;
-	cout << "СЛОЖЕНИЕ: " << A + C<< endl;
+	
 }
