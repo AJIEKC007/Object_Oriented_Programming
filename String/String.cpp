@@ -120,6 +120,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 }
 std::istream& operator>>(std::istream& is, String& obj)
 {
+	//cout << typeid(is.rdbuf()).name() << endl;
 	return is >> obj.get_str();
 }
 

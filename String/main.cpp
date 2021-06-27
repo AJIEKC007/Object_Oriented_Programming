@@ -64,5 +64,6 @@ void main()
 					//и возвращает значение типа String.
 	String str6{};	//Явный вызов конструктора по умолчанию.	  
 #endif // HOW_CAN_WE_CALL_CONSTRUCTORS
-
+	String str;
+	cout<<"Введите строку: "
 }
