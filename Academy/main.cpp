@@ -1,5 +1,6 @@
 ﻿#include<iostream>
 #include<string>
+#include<regex>
 using namespace std;
 
 #define delimiter "\n-----------------------------------------------------------\n"
@@ -23,15 +24,28 @@ public:
 	}
 	void set_last_name(const string& last_name)
 	{
-		this->last_name = last_name;
+		std::regex en_rgx("[A-Z][a-z]{1,15}");
+		std::regex ru_rgx("[А-Я][а-я]{1,15}");
+		std::regex ru_double_rgx("([А-Я][а-я]{1,15}[ -]{0,1}){1,2}");
+		//std::regex ru_double_rgx("[А-Я][а-я]{1,15}[ -]{0,1}[А-Я]{0,1}[а-я]{0,15}");
+		//std::regex ru_double_rgx("\\(ru_rgx)[ -](ru_rgx){0,1}");
+			if (std::regex_match(last_name, en_rgx)|| 
+				std::regex_match(last_name, ru_rgx)||
+				std::regex_match(last_name, ru_double_rgx)
+				)this->last_name = last_name;
+			else this->last_name = "Bad name";
 	}
 	void set_first_name(const string& first_name)
 	{
-		this->first_name = first_name;
+		std::regex en_rgx("[A-Z][a-z]{1,15}");
+		std::regex ru_rgx("[А-Я][а-я]{1,15}");
+		if (std::regex_match(first_name, en_rgx)|| std::regex_match(first_name, ru_rgx))this->first_name = first_name;
+		else this->first_name = "Bad name";
 	}
 	void set_age(unsigned int age)
 	{
-		this->age=age;
+		if (age >= 18 && age <= 150)this->age = age;
+		else this->age=0;
 	}
 	//     Constructors:
 	Human(const string& last_name, const string& first_name, unsigned int age)
@@ -84,7 +98,8 @@ public:
 	}
 	void set_rating(double rating)
 	{
-		this->rating = rating;
+		if (rating >= 0 && rating <= 100)this->rating = rating;
+		else this->rating = 0;
 	}
 	//Constructor
 	Student(
@@ -133,7 +148,8 @@ public:
 	}
 	void set_experiance(unsigned int experiance)
 	{
-		this->experiance=experiance;
+		if (experiance >= 0 && experiance <= 130)this->experiance = experiance;
+		else experiance = 0;
 	}
 	//constructors
 	Teacher(
@@ -224,7 +240,7 @@ void main()
 	{
 		new Student("Василььев","Александр",23,"РПО","ПВ011",90),
 		new Student("Васильева"," Маргарита",23,"РПО","ПВ011",90),
-		new Teacher("Ковтун", "Олег",36,"Разработка приложений на С++",6),
+		new Teacher("Петров Сидоров", "Олег",36,"Разработка приложений на С++",6),
 		new Student("Ивлев","Александр",25,"РПО","ПВ011",95),
 		new Graduate("Рахманин","Николай",28,"РПО","ПВ011",98,"Разработка кросплатформенной обучающей игры"),
 		new Teacher("Романов", "Андрей",36,"HardWarePC",6),
